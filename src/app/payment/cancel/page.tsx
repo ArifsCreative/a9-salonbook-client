@@ -20,9 +20,9 @@ export default function PaymentCancelPage() {
         </h1>
 
         <p className="mt-5 text-sm leading-7 text-[#766F70]">
-          You returned without completing checkout. Your appointment remains
-          available in your dashboard, where you can check its payment status
-          and try again.
+          Your payment was not completed. No payment has been confirmed for this
+          checkout. You can return to your appointments and try again whenever
+          you are ready.
         </p>
 
         <Link
