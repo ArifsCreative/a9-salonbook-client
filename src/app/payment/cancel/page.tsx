@@ -16,7 +16,7 @@ export default function PaymentCancelPage() {
         </p>
 
         <h1 className="mt-3 font-serif text-3xl text-[#211F20]">
-          Checkout Cancelled
+          Payment Not Completed
         </h1>
 
         <p className="mt-5 text-sm leading-7 text-[#766F70]">
