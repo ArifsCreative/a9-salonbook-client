@@ -55,6 +55,7 @@ export default function CustomerAppointments() {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [cancellingId, setCancellingId] = useState<string | null>(null);
+  const [payingId, setPayingId] = useState<string | null>(null);
 
   const getToken = useCallback(async () => {
     const response = await fetch(`${API}/api/auth/token`, {
@@ -110,6 +111,52 @@ export default function CustomerAppointments() {
 
     return () => window.clearTimeout(timeoutId);
   }, [loadAppointments]);
+
+  async function payForAppointment(id: string) {
+    setPayingId(id);
+    setError("");
+    setNotice("");
+
+    try {
+      const token = await getToken();
+
+      const response = await fetch(`${API}/api/payments/checkout/${id}`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data: {
+        success: boolean;
+        checkoutUrl?: string;
+        message?: string;
+      } = await response.json();
+
+      if (!response.ok || !data.success || !data.checkoutUrl) {
+        throw new Error(data.message || "Unable to start payment.");
+      }
+
+      const checkoutUrl = new URL(data.checkoutUrl);
+
+      if (
+        checkoutUrl.protocol !== "https:" ||
+        !(
+          checkoutUrl.hostname === "checkout.stripe.com" ||
+          checkoutUrl.hostname.endsWith(".checkout.stripe.com")
+        )
+      ) {
+        throw new Error("Invalid Stripe Checkout URL.");
+      }
+
+      window.location.assign(checkoutUrl.toString());
+    } catch (err) {
+      setError(
+        err instanceof Error ? err.message : "Payment could not be started.",
+      );
+      setPayingId(null);
+    }
+  }
 
   async function cancelAppointment(id: string) {
     if (!window.confirm("Are you sure you want to cancel this appointment?")) {
@@ -288,6 +335,23 @@ export default function CustomerAppointments() {
                   {appointment.message}
                 </p>
               )}
+
+              {appointment.status === "confirmed" &&
+                appointment.paymentStatus === "unpaid" && (
+                  <div className="mt-6 flex justify-end border-t border-[#EEE8E1] pt-5">
+                    <button
+                      type="button"
+                      onClick={() => void payForAppointment(appointment._id)}
+                      disabled={payingId !== null}
+                      className="inline-flex items-center gap-2 bg-[#633B45] px-6 py-3 text-sm font-medium text-white transition hover:bg-[#4F2F38] disabled:opacity-50"
+                    >
+                      <CreditCard size={17} />
+                      {payingId === appointment._id
+                        ? "Redirecting to Stripe..."
+                        : `Pay Now — $${appointment.servicePrice.toFixed(2)}`}
+                    </button>
+                  </div>
+                )}
 
               {appointment.status === "pending" && (
                 <div className="mt-6 flex justify-end border-t border-[#EEE8E1] pt-5">
