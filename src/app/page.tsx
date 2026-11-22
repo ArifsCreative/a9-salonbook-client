@@ -1,20 +1,23 @@
-
-import BackendStatus from "@/components/BackendStatus";
+import HomeHero from "@/components/home/HomeHero";
+import BrandIntroduction from "@/components/home/BrandIntroduction";
+import ServiceCategories from "@/components/home/ServiceCategories";
+import FeaturedServices from "@/components/home/FeaturedServices";
+import { BrandExperience, BookingCTA } from "@/components/home/BrandExperience";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gray-50 p-8">
-      <div className="mx-auto max-w-3xl">
-        <h1 className="mb-4 text-3xl font-bold text-gray-900">
-          SalonBook
-        </h1>
+    <main>
+      <HomeHero />
 
-        <p className="mb-8 text-gray-600">
-          Your salon appointment booking platform.
-        </p>
+      <BrandIntroduction />
 
-        <BackendStatus />
-      </div>
+      <ServiceCategories />
+
+      <FeaturedServices />
+
+      <BrandExperience />
+
+      <BookingCTA />
     </main>
   );
 }
