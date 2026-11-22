@@ -230,6 +230,13 @@ export default function AdminDashboard() {
                 View Services
                 <ArrowUpRight size={16} />
               </Link>
+              <Link
+                href="/admin/services"
+                className="inline-flex items-center gap-2 border border-[#C3A982] px-5 py-3 text-xs font-semibold text-[#C3A982] transition hover:bg-[#C3A982] hover:text-[#211F20]"
+              >
+                <Scissors size={16} />
+                Manage Services
+              </Link>
 
               <button
                 type="button"
