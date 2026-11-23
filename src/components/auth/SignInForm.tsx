@@ -13,6 +13,7 @@ export default function SignInForm() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState("");
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -97,6 +98,33 @@ export default function SignInForm() {
       );
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setError("");
+    setGoogleLoading(true);
+
+    try {
+      const result = await signIn.social({
+        provider: "google",
+        callbackURL: "/auth/callback",
+        errorCallbackURL: "/sign-in",
+      });
+
+      if (result.error) {
+        throw new Error(
+          result.error.message || "Unable to sign in with Google.",
+        );
+      }
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Google sign-in failed. Please try again.",
+      );
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -201,6 +229,55 @@ export default function SignInForm() {
           )}
         </button>
       </form>
+
+      <div className="mt-7">
+        <div className="flex items-center gap-4">
+          <div className="h-px flex-1 bg-[#D8CEC1]" />
+          <span className="text-xs text-[#746B62]">OR CONTINUE WITH</span>
+          <div className="h-px flex-1 bg-[#D8CEC1]" />
+        </div>
+
+        <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          disabled={loading || googleLoading}
+          className="mt-6 flex h-13 w-full items-center justify-center gap-3 border border-[#D8CEC1] bg-white px-6 text-sm font-semibold text-[#211F20] transition hover:border-[#AA8964] hover:bg-[#F6F3ED] disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {googleLoading ? (
+            <>
+              <LoaderCircle size={18} className="animate-spin" />
+              Connecting to Google...
+            </>
+          ) : (
+            <>
+              <svg
+                width="19"
+                height="19"
+                viewBox="0 0 48 48"
+                aria-hidden="true"
+              >
+                <path
+                  fill="#EA4335"
+                  d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                />
+                <path
+                  fill="#4285F4"
+                  d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.27 5.48-4.79 7.18l7.73 6C44.39 38.03 46.98 31.88 46.98 24.55z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M10.53 28.59A14.4 14.4 0 0 1 9.75 24c0-1.59.27-3.13.76-4.59l-7.98-6.19A23.9 23.9 0 0 0 0 24c0 3.87.93 7.53 2.56 10.78l7.97-6.19z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M24 48c6.48 0 11.93-2.13 15.91-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.18 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.97 6.19C6.51 42.62 14.62 48 24 48z"
+                />
+              </svg>
+              Continue with Google
+            </>
+          )}
+        </button>
+      </div>
 
       <div className="mt-8 border-t border-[#D8CEC1] pt-6 text-center">
         <p className="text-sm text-[#746B62]">
