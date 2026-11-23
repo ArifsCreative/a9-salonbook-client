@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SalonBook — Salon Appointment Booking Platform
+
+A modern, full-stack salon appointment booking platform featuring a responsive user interface, secure authentication, appointment management, online payments, and role-based dashboards.
+
+## Live Links
+
+- **Live Website:** https://a9-salonbook-client.vercel.app
+- **Frontend Repository:** https://github.com/ArifsCreative/a9-salonbook-client
+- **Backend Repository:** https://github.com/ArifsCreative/a9-salonbook-server
+- **Backend API:** https://a9-salonbook-server.vercel.app
+
+## Key Features
+
+### Customer Features
+- Browse available salon services.
+- Search and filter services by category.
+- View service details and pricing.
+- Register and sign in using email and password.
+- Google OAuth authentication integration.
+- Book salon appointments.
+- View and manage appointments.
+- Cancel appointments.
+- Pay securely using Stripe Checkout.
+- View payment history.
+- Access a personalized customer dashboard.
+
+### Admin Features
+- View dashboard statistics.
+- Add, edit, and delete salon services.
+- Manage customer appointments.
+- View registered customers.
+- Block or unblock customers.
+- Monitor payment transactions.
+
+## Technology Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **UI Library:** React 19
+- **Styling:** Tailwind CSS 4
+- **Icons:** Lucide React
+- **Authentication:** Better Auth
+- **Payments:** Stripe Checkout
+- **Backend:** Node.js, Express.js, MongoDB
+- **Deployment:** Vercel
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js and npm
+- A running SalonBook backend server
+
+### Installation
+
+Clone the frontend repository:
+
+```bash
+git clone https://github.com/ArifsCreative/a9-salonbook-client.git
+cd a9-salonbook-client
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env.local` file in the project root:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `npm run dev` | Start the development server |
+| `npm run build` | Build the production application |
+| `npm run start` | Start the production server |
 
-## Learn More
+## Authentication and Authorization
 
-To learn more about Next.js, take a look at the following resources:
+SalonBook uses Better Auth for authentication. The backend provides role-based authorization for customers and administrators.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Protected features require authentication, and administrator operations are restricted to authorized admin accounts.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Payment Integration
 
-## Deploy on Vercel
+Stripe Checkout handles online appointment payments. Payment verification and transaction recording are managed by the backend using Stripe webhooks.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Responsive Design
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application is designed for desktop, tablet, and mobile devices, featuring responsive navigation, service listings, appointment management, and dashboards.
+
+## Deployment
+
+The frontend is deployed on Vercel.
+
+**Production URL:** https://a9-salonbook-client.vercel.app
+
+Configure `NEXT_PUBLIC_API_URL` in Vercel to point to the deployed backend API.
+
+## Related Repository
+
+**SalonBook Backend:** https://github.com/ArifsCreative/a9-salonbook-server
+
+## Project Purpose
+
+Developed as a full-stack web development assignment to demonstrate authentication, role-based access control, REST API integration, database operations, appointment management, payment processing, and responsive frontend development.
