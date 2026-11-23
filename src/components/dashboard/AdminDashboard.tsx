@@ -248,6 +248,63 @@ export default function AdminDashboard() {
               </button>
             </div>
           </div>
+
+          <section className="pb-16">
+            <div className="mb-6">
+              <p className="sb-label text-[#633B45]">ADMINISTRATION / 02</p>
+              <h2 className="mt-3 font-serif text-3xl text-[#211F20]">
+                Management tools.
+              </h2>
+              <p className="mt-3 text-sm text-[#746B62]">
+                Manage your salon operations from one place.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {[
+                {
+                  title: "Manage Services",
+                  description: "Add, edit and manage salon services.",
+                  href: "/admin/services",
+                },
+                {
+                  title: "Manage Appointments",
+                  description: "Review and confirm appointment requests.",
+                  href: "/admin/appointments",
+                },
+                {
+                  title: "Manage Customers",
+                  description: "Review customers and manage account access.",
+                  href: "/admin/customers",
+                },
+                {
+                  title: "Payment Transactions",
+                  description: "View payments and transaction history.",
+                  href: "/admin/transactions",
+                },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="group flex items-center justify-between border border-[#D8CEC1] bg-white p-6 transition hover:border-[#AA8964]"
+                >
+                  <div>
+                    <p className="font-serif text-2xl text-[#211F20]">
+                      {item.title}
+                    </p>
+                    <p className="mt-2 text-sm text-[#746B62]">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  <ArrowUpRight
+                    size={20}
+                    className="shrink-0 text-[#AA8964] transition group-hover:translate-x-1"
+                  />
+                </Link>
+              ))}
+            </div>
+          </section>
         </Container>
       </section>
 

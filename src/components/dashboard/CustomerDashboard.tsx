@@ -347,6 +347,53 @@ export default function CustomerDashboard() {
           )}
         </section>
 
+        <section className="pb-10">
+          <div className="mb-6">
+            <p className="sb-label text-[#633B45]">YOUR ACCOUNT / 02</p>
+            <h2 className="mt-3 font-serif text-3xl text-[#211F20]">
+              Quick access.
+            </h2>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Link
+              href="/customer/appointments"
+              className="group flex items-center justify-between border border-[#D8CEC1] bg-white p-6 transition hover:border-[#AA8964]"
+            >
+              <div>
+                <p className="font-serif text-2xl text-[#211F20]">
+                  My Appointments
+                </p>
+                <p className="mt-2 text-sm text-[#746B62]">
+                  View bookings and manage appointment requests.
+                </p>
+              </div>
+              <ArrowUpRight
+                size={20}
+                className="shrink-0 text-[#AA8964] transition group-hover:translate-x-1"
+              />
+            </Link>
+
+            <Link
+              href="/customer/payments"
+              className="group flex items-center justify-between border border-[#D8CEC1] bg-white p-6 transition hover:border-[#AA8964]"
+            >
+              <div>
+                <p className="font-serif text-2xl text-[#211F20]">
+                  Payment History
+                </p>
+                <p className="mt-2 text-sm text-[#746B62]">
+                  Review your previous payment transactions.
+                </p>
+              </div>
+              <ArrowUpRight
+                size={20}
+                className="shrink-0 text-[#AA8964] transition group-hover:translate-x-1"
+              />
+            </Link>
+          </div>
+        </section>
+
         <section className="mb-16 grid gap-6 lg:grid-cols-[1.3fr_0.7fr]">
           <div className="bg-[#EAE5DD] p-8 sm:p-10">
             <Sparkles size={23} className="text-[#AA8964]" />
