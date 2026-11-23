@@ -108,8 +108,8 @@ export default function SignInForm() {
     try {
       const result = await signIn.social({
         provider: "google",
-        callbackURL: "/auth/callback",
-        errorCallbackURL: "/sign-in",
+        callbackURL: "https://a9-salonbook-client.vercel.app/auth/callback",
+        errorCallbackURL: "https://a9-salonbook-client.vercel.app/sign-in",
       });
 
       if (result.error) {
